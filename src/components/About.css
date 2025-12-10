@@ -1,0 +1,126 @@
+/* src/About.css - Dark Theme */
+
+.about-container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: #e0e0e0;
+  background-color: #121212;
+}
+
+/* Header */
+.about-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.about-header h1 {
+  font-size: 36px;
+  color: #ffb74d;
+  margin-bottom: 10px;
+}
+
+.about-header p {
+  font-size: 18px;
+  color: #ffd54f;
+}
+
+/* Sections */
+.about-section {
+  margin-bottom: 50px;
+  padding: 30px;
+  border-radius: 16px;
+  background: #1e1e1e;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.about-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+}
+
+.about-section h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #ffb74d;
+}
+
+.about-section p, 
+.about-section ul li {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+/* Core Values List */
+.values-section ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+.values-section ul li {
+  margin-bottom: 10px;
+  color: #ffd54f;
+}
+
+/* Team Section */
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.team-member-card {
+  flex: 1 1 250px;
+  background: #272727;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #444;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.team-member-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(255, 183, 77, 0.3);
+}
+
+.team-member-card h3 {
+  font-size: 20px;
+  margin-bottom: 5px;
+  color: #ffb74d;
+}
+
+.team-member-card .role {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #ffd54f;
+}
+
+.team-member-card .bio {
+  font-size: 14px;
+  color: #ccc;
+}
+
+/* Footer */
+.about-footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+  color: #ffb74d;
+  border-top: 1px solid #444;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+  .team-grid {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .about-section {
+    padding: 20px;
+  }
+}
