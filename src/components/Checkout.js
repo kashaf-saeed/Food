@@ -32,32 +32,48 @@ const Checkout = () => {
 
     setLoading(true);
 
-    const { error } = await supabase.from("orders").insert([
-      {
-        "Full-name": name,
-        "Email": email,
-        "Address": address,
-        "City": city,
-        "State": state,
-        "Zip/Postal code": zip,
-        cart_items: JSON.stringify(cart),
-        total_price: totalPrice,
-      },
-    ]);
+    // --- Step 1: Insert order in Supabase ---
+    const orderData = {
+      "Full-name": name,
+      "Email": email,
+      "Address": address,
+      "City": city,
+      "State": state,
+      "Zip/Postal code": zip,
+      cart_items: JSON.stringify(cart),
+      total_price: totalPrice,
+    };
 
-    setLoading(false);
+    const { error } = await supabase.from("orders").insert([orderData]);
 
     if (error) {
       console.error(error);
       alert("❌ Order failed: " + error.message);
-    } else {
-      alert(`✅ Thank you ${name}! Your order has been placed.`);
-
-      // Reset form & cart
-      setCart([]);
-      setName(""); setEmail(""); setAddress(""); setCity(""); setState(""); setZip("");
-      setPaymentMethod("Credit Card");
+      setLoading(false);
+      return;
     }
+
+    // --- Step 2: Trigger Edge Function for email ---
+    // Replace <project_ref> with your Supabase project ref
+    fetch("https://xzvjuwimgoabnkjsbwqa.supabase.co/functions/v1/send-order-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        customer_email: email,
+        order_id: orderData.id || Math.floor(Math.random() * 100000),
+        items: cart.map(item => item.name)
+      }),
+    })
+      .then(res => res.json())
+      .then(data => console.log("Email sent:", data))
+      .catch(err => console.error("Email error:", err));
+
+    // --- Step 3: Reset form & cart ---
+    setLoading(false);
+    alert(`✅ Thank you ${name}! Your order has been placed.`);
+    setCart([]);
+    setName(""); setEmail(""); setAddress(""); setCity(""); setState(""); setZip("");
+    setPaymentMethod("Credit Card");
   };
 
   const increaseQty = (id) => {
