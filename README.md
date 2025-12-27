@@ -18,7 +18,7 @@ A modern, responsive **Food Ordering Web App** built with **React** and **Supaba
 
 - **Frontend:** React, React Router  
 - **Backend:** Supabase (Database, Auth)  
-- **Styling:** CSS / Tailwind CSS  
+- **Styling:** CSS
 
 ---
 
